@@ -1,29 +1,48 @@
 import Link from "next/link";
-import { ArrowRight, BarChart3, Shield, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  TrendingUp,
+  Target,
+  LayoutDashboard,
+  Cpu,
+  BrainCircuit,
+  ScanSearch,
+  Database,
+  Cog,
+  Lightbulb,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SectionHeading } from "@/components/SectionHeading";
+import { ValueCard } from "@/components/ValueCard";
 
 export default function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-primary-900 text-white py-20">
+      <section className="bg-primary-900 text-white py-24">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Data-Driven Insights for Higher Education Athletics
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            Empowered Data.{" "}
+            <span className="text-accent">AI Insights.</span>{" "}
+            <br className="hidden md:block" />
+            Real Results.
           </h1>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-            EDInsights empowers athletic departments with actionable analytics
-            to improve performance, compliance, and student-athlete outcomes.
+          <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+            Transform your sports analytics with our cutting-edge AI platform.
+            Unlock performance data that drives winning strategies.
           </p>
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/signup">
-              <Button size="lg" className="bg-accent hover:bg-accent-700">
-                Get Started <ArrowRight className="ml-2 h-4 w-4" />
+              <Button size="lg" className="bg-accent hover:bg-accent-700 text-lg px-8">
+                Get Started <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link href="/about">
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-white border-white hover:bg-white/10 text-lg px-8"
+              >
                 Learn More
               </Button>
             </Link>
@@ -31,49 +50,88 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features */}
-      <section className="py-16">
+      {/* Vision / Value Cards */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-primary">
-            Why EDInsights?
-          </h2>
+          <SectionHeading
+            title="Driving Athletic Excellence"
+            subtitle="Our platform delivers measurable impact across every dimension of sports performance."
+          />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card>
-              <CardHeader>
-                <BarChart3 className="h-10 w-10 text-secondary mb-2" />
-                <CardTitle>Real-Time Analytics</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Track performance metrics across all sports programs with
-                  live dashboards and customizable reports.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <Shield className="h-10 w-10 text-secondary mb-2" />
-                <CardTitle>Compliance Ready</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Stay ahead of NCAA and conference requirements with built-in
-                  compliance monitoring and alerts.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <Zap className="h-10 w-10 text-secondary mb-2" />
-                <CardTitle>Actionable Insights</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Turn raw data into strategic decisions with AI-powered
-                  recommendations and trend analysis.
-                </p>
-              </CardContent>
-            </Card>
+            <ValueCard
+              icon={TrendingUp}
+              title="Enhanced Performance"
+              stat="37%"
+              description="Average improvement in key performance metrics for teams using our analytics platform."
+            />
+            <ValueCard
+              icon={Target}
+              title="Strategic Advantage"
+              stat="86%"
+              description="Of coaches report better game-day decisions with AI-powered scouting and strategy tools."
+            />
+            <ValueCard
+              icon={LayoutDashboard}
+              title="Complete Dashboard"
+              stat="12K+"
+              description="Data points tracked per athlete per season, delivering a comprehensive performance picture."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Technology */}
+      <section className="bg-primary-900 text-white py-20">
+        <div className="container mx-auto px-4">
+          <SectionHeading
+            title="Powered by Advanced Technology"
+            subtitle="We combine modern AI and machine learning to turn raw data into winning strategies."
+            light
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            {/* Capabilities */}
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold text-secondary mb-4">
+                Core Capabilities
+              </h3>
+              {[
+                { icon: Cpu, text: "Python & AI-Driven Processing" },
+                { icon: BrainCircuit, text: "Machine Learning Models" },
+                { icon: ScanSearch, text: "Real-Time Pattern Detection" },
+              ].map(({ icon: Icon, text }) => (
+                <div key={text} className="flex items-center gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary/20">
+                    <Icon className="h-5 w-5 text-secondary" />
+                  </div>
+                  <span className="text-lg">{text}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Numbered Steps */}
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold text-secondary mb-4">
+                How It Works
+              </h3>
+              {[
+                { icon: Database, step: 1, title: "Collection", desc: "Aggregate data from multiple sources seamlessly." },
+                { icon: Cog, step: 2, title: "Processing", desc: "Clean, normalize, and enrich data at scale." },
+                { icon: Lightbulb, step: 3, title: "Insights", desc: "Deliver actionable intelligence to your team." },
+              ].map(({ icon: Icon, step, title, desc }) => (
+                <div key={step} className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-white font-bold">
+                    {step}
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <Icon className="h-4 w-4 text-secondary" />
+                      <span className="font-semibold text-lg">{title}</span>
+                    </div>
+                    <p className="text-gray-300 mt-1">{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
