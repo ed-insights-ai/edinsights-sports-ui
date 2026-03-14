@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { GraduationCap, Menu } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { GraduationCap, Menu, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -10,6 +11,14 @@ import {
   SheetTrigger,
   SheetTitle,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -18,6 +27,29 @@ const navItems = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
+  const supabase = createClient();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase.auth]);
+
+  async function handleSignOut() {
+    await supabase.auth.signOut();
+    router.push("/");
+    router.refresh();
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -38,11 +70,27 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Link href="/login">
-            <Button variant="outline" size="sm">
-              Sign In
-            </Button>
-          </Link>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm">
+                  {user.email}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={handleSignOut}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link href="/login">
+              <Button variant="outline" size="sm">
+                Sign In
+              </Button>
+            </Link>
+          )}
         </nav>
 
         {/* Mobile nav */}
@@ -66,9 +114,26 @@ export function Header() {
                   {item.label}
                 </Link>
               ))}
-              <Link href="/login" onClick={() => setOpen(false)}>
-                <Button className="w-full">Sign In</Button>
-              </Link>
+              {user ? (
+                <>
+                  <p className="text-sm text-muted-foreground">{user.email}</p>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => {
+                      handleSignOut();
+                      setOpen(false);
+                    }}
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Sign Out
+                  </Button>
+                </>
+              ) : (
+                <Link href="/login" onClick={() => setOpen(false)}>
+                  <Button className="w-full">Sign In</Button>
+                </Link>
+              )}
             </div>
           </SheetContent>
         </Sheet>
