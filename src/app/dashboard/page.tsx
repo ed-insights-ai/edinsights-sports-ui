@@ -1,6 +1,7 @@
 import { BarChart3, Users, Trophy, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/server";
+import { DashboardStats } from "@/components/DashboardStats";
 
 export default async function DashboardPage() {
   const supabase = createClient();
@@ -59,6 +60,8 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      <DashboardStats />
 
       <Card>
         <CardHeader>
