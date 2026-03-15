@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: "media",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -78,6 +78,29 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(24px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "gradient-shift": {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
+        "float-dot": {
+          "0%, 100%": { transform: "translateY(0) scale(1)", opacity: "0.4" },
+          "50%": { transform: "translateY(-20px) scale(1.1)", opacity: "0.7" },
+        },
+      },
+      animation: {
+        "fade-in-up": "fade-in-up 0.6s ease-out forwards",
+        "fade-in-up-delay-1": "fade-in-up 0.6s ease-out 0.15s forwards",
+        "fade-in-up-delay-2": "fade-in-up 0.6s ease-out 0.3s forwards",
+        "fade-in-up-delay-3": "fade-in-up 0.6s ease-out 0.45s forwards",
+        "gradient-shift": "gradient-shift 8s ease infinite",
+        "float-dot": "float-dot 6s ease-in-out infinite",
       },
     },
   },
