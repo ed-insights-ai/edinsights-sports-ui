@@ -49,7 +49,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="text-white border-white hover:bg-white/10 text-lg px-8 transition-transform duration-200 hover:scale-105"
+                className="bg-transparent text-white border-white hover:bg-white/10 hover:text-white text-lg px-8 transition-transform duration-200 hover:scale-105"
               >
                 Learn More
               </Button>
