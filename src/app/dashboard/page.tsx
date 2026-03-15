@@ -1,20 +1,31 @@
 import { BarChart3, Users, Trophy, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { createClient } from "@/lib/supabase/server";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-primary mb-8">Dashboard</h1>
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-2xl font-bold text-primary-900">Overview</h2>
+        <p className="text-muted-foreground">
+          Welcome back, {user?.email ?? "User"}
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Athletes</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">--</div>
-            <p className="text-xs text-muted-foreground">Sign in to view</p>
+            <div className="text-2xl font-bold">1,240</div>
+            <p className="text-xs text-muted-foreground">Across all programs</p>
           </CardContent>
         </Card>
         <Card>
@@ -23,8 +34,8 @@ export default function DashboardPage() {
             <Trophy className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">--</div>
-            <p className="text-xs text-muted-foreground">Sign in to view</p>
+            <div className="text-2xl font-bold">18</div>
+            <p className="text-xs text-muted-foreground">Active programs</p>
           </CardContent>
         </Card>
         <Card>
@@ -33,8 +44,8 @@ export default function DashboardPage() {
             <BarChart3 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">--</div>
-            <p className="text-xs text-muted-foreground">Sign in to view</p>
+            <div className="text-2xl font-bold">94%</div>
+            <p className="text-xs text-muted-foreground">Title IX compliance</p>
           </CardContent>
         </Card>
         <Card>
@@ -43,20 +54,21 @@ export default function DashboardPage() {
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">--</div>
-            <p className="text-xs text-muted-foreground">Sign in to view</p>
+            <div className="text-2xl font-bold text-secondary">+12%</div>
+            <p className="text-xs text-muted-foreground">Engagement this month</p>
           </CardContent>
         </Card>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Welcome to your Dashboard</CardTitle>
+          <CardTitle>Welcome to EDInsights Dashboard</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground">
-            This dashboard will display your athletics program data once
-            authentication is configured. Sign in to access your analytics.
+            Your centralized hub for athletics program analytics. Explore team
+            performance, player statistics, and program insights using the
+            navigation sidebar.
           </p>
         </CardContent>
       </Card>
