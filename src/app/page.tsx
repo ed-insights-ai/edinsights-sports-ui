@@ -16,6 +16,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { ValueCard } from "@/components/ValueCard";
 import { AnimatedDataBackground } from "@/components/AnimatedDataBackground";
 import { DataDots } from "@/components/DataDots";
+import { StatsPreview } from "@/components/StatsPreview";
 
 export default function HomePage() {
   return (
@@ -89,6 +90,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Platform Preview */}
+      <StatsPreview />
 
       {/* Technology */}
       <section className="relative bg-primary-900 dark:bg-gray-950 text-white py-20 overflow-hidden">
