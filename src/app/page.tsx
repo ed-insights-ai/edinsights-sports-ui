@@ -14,26 +14,33 @@ import {
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ValueCard } from "@/components/ValueCard";
+import { AnimatedDataBackground } from "@/components/AnimatedDataBackground";
+import { DataDots } from "@/components/DataDots";
 
 export default function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-primary-900 text-white py-24">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+      <section className="relative bg-primary-900 dark:bg-gray-950 text-white py-24 overflow-hidden">
+        <AnimatedDataBackground />
+        <DataDots />
+        <div className="container relative z-10 mx-auto px-4 text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight opacity-0-init animate-fade-in-up">
             Empowered Data.{" "}
             <span className="text-accent">AI Insights.</span>{" "}
             <br className="hidden md:block" />
             Real Results.
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto opacity-0-init animate-fade-in-up-delay-1">
             Transform your sports analytics with our cutting-edge AI platform.
             Unlock performance data that drives winning strategies.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 opacity-0-init animate-fade-in-up-delay-2">
             <Link href="/signup">
-              <Button size="lg" className="bg-accent hover:bg-accent-700 text-lg px-8">
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent-700 text-lg px-8 transition-transform duration-200 hover:scale-105"
+              >
                 Get Started <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
@@ -41,7 +48,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="text-white border-white hover:bg-white/10 text-lg px-8"
+                className="text-white border-white hover:bg-white/10 text-lg px-8 transition-transform duration-200 hover:scale-105"
               >
                 Learn More
               </Button>
@@ -51,7 +58,7 @@ export default function HomePage() {
       </section>
 
       {/* Vision / Value Cards */}
-      <section className="py-20">
+      <section className="py-20 dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <SectionHeading
             title="Driving Athletic Excellence"
@@ -63,26 +70,39 @@ export default function HomePage() {
               title="Enhanced Performance"
               stat="37%"
               description="Average improvement in key performance metrics for teams using our analytics platform."
+              className="opacity-0-init animate-fade-in-up"
             />
             <ValueCard
               icon={Target}
               title="Strategic Advantage"
               stat="86%"
               description="Of coaches report better game-day decisions with AI-powered scouting and strategy tools."
+              className="opacity-0-init animate-fade-in-up-delay-1"
             />
             <ValueCard
               icon={LayoutDashboard}
               title="Complete Dashboard"
               stat="12K+"
               description="Data points tracked per athlete per season, delivering a comprehensive performance picture."
+              className="opacity-0-init animate-fade-in-up-delay-2"
             />
           </div>
         </div>
       </section>
 
       {/* Technology */}
-      <section className="bg-primary-900 text-white py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-primary-900 dark:bg-gray-950 text-white py-20 overflow-hidden">
+        {/* Grid pattern overlay */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        <div className="container relative z-10 mx-auto px-4">
           <SectionHeading
             title="Powered by Advanced Technology"
             subtitle="We combine modern AI and machine learning to turn raw data into winning strategies."
@@ -90,7 +110,7 @@ export default function HomePage() {
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             {/* Capabilities */}
-            <div className="space-y-6">
+            <div className="space-y-6 opacity-0-init animate-fade-in-up">
               <h3 className="text-xl font-semibold text-secondary mb-4">
                 Core Capabilities
               </h3>
@@ -99,8 +119,8 @@ export default function HomePage() {
                 { icon: BrainCircuit, text: "Machine Learning Models" },
                 { icon: ScanSearch, text: "Real-Time Pattern Detection" },
               ].map(({ icon: Icon, text }) => (
-                <div key={text} className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary/20">
+                <div key={text} className="flex items-center gap-4 group">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary/20 transition-colors duration-200 group-hover:bg-secondary/30">
                     <Icon className="h-5 w-5 text-secondary" />
                   </div>
                   <span className="text-lg">{text}</span>
@@ -109,7 +129,7 @@ export default function HomePage() {
             </div>
 
             {/* Numbered Steps */}
-            <div className="space-y-6">
+            <div className="space-y-6 opacity-0-init animate-fade-in-up-delay-1">
               <h3 className="text-xl font-semibold text-secondary mb-4">
                 How It Works
               </h3>
@@ -119,7 +139,7 @@ export default function HomePage() {
                 { icon: Lightbulb, step: 3, title: "Insights", desc: "Deliver actionable intelligence to your team." },
               ].map(({ icon: Icon, step, title, desc }) => (
                 <div key={step} className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-white font-bold">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-white font-bold transition-transform duration-200 hover:scale-110">
                     {step}
                   </div>
                   <div>

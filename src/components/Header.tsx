@@ -52,11 +52,11 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-white/95 dark:bg-gray-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-900/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center space-x-2">
-          <GraduationCap className="h-6 w-6 text-primary" />
-          <span className="text-xl font-bold text-primary">EDInsights</span>
+          <GraduationCap className="h-6 w-6 text-primary dark:text-secondary" />
+          <span className="text-xl font-bold text-primary dark:text-white">EDInsights</span>
         </Link>
 
         {/* Desktop nav */}
